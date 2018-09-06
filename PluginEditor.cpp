@@ -17,9 +17,24 @@
 DistortionVstbyMeAudioProcessorEditor::DistortionVstbyMeAudioProcessorEditor (DistortionVstbyMeAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p)
 {
+	addAndMakeVisible(driveKnob = new Slider("Drive"));
+	driveKnob->setSliderStyle(Slider::Rotary);
+	driveKnob->setTextBoxStyle(Slider::NoTextBox, false, 100, 100);
+
+	addAndMakeVisible(rangeKnob = new Slider("Range"));
+	rangeKnob->setSliderStyle(Slider::Rotary);
+	rangeKnob->setTextBoxStyle(Slider::NoTextBox, false, 100, 100);
+
+	addAndMakeVisible(blendKnob = new Slider("Blend"));
+	blendKnob->setSliderStyle(Slider::Rotary);
+	blendKnob->setTextBoxStyle(Slider::NoTextBox, false, 100, 100);
+
+	addAndMakeVisible(volumeKnob = new Slider("Volume"));
+	volumeKnob->setSliderStyle(Slider::Rotary);
+	volumeKnob->setTextBoxStyle(Slider::NoTextBox, false, 100, 100);
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (500, 200);
 }
 
 DistortionVstbyMeAudioProcessorEditor::~DistortionVstbyMeAudioProcessorEditor()
