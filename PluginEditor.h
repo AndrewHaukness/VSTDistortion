@@ -28,6 +28,18 @@ public:
     void resized() override;
 
 private:
+
+	ScopedPointer<Slider> driveKnob;
+	ScopedPointer<Slider> rangeKnob;
+	ScopedPointer<Slider> blendKnob;
+	ScopedPointer<Slider> volumeKnob;
+
+	ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> driveAttachment;
+	ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> rangeAttachment;
+	ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> blendAttachment;
+	ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> volumeAttachment;
+
+
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     DistortionVstbyMeAudioProcessor& processor;
