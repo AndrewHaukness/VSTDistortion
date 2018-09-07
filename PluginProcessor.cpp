@@ -158,7 +158,7 @@ void DistortionVstbyMeAudioProcessor::processBlock (AudioBuffer<float>& buffer, 
     }
 }
 
-AudioProcessorValueTreeState& DistortionVstByMeAudioProcessor::getState() {
+AudioProcessorValueTreeState& DistortionVstbyMeAudioProcessor::getState() {
 	return *state;
 }
 
