@@ -27,6 +27,16 @@ DistortionVstbyMeAudioProcessor::DistortionVstbyMeAudioProcessor()
 
 	state = new AudioProcessorValueTreeState(*this, nullptr);
 
+	state->createAndAddParameter("drive", "Drive", "Drive", NormalisableRange<float>(0.0, 1.0, 0.0001), 1.0, nullptr, nullptr);
+	state->createAndAddParameter("range", "Range", "Range", NormalisableRange<float>(0.0, 1.0, 0.0001), 1.0, nullptr, nullptr);
+	state->createAndAddParameter("blend", "Blend", "Blend", NormalisableRange<float>(0.0, 1.0, 0.0001), 1.0, nullptr, nullptr);
+	state->createAndAddParameter("volume", "Volume", "Volume", NormalisableRange<float>(0.0, 1.0, 0.0001), 1.0, nullptr, nullptr);
+
+	state->state = ValueTree("drive");
+	state->state = ValueTree("range");
+	state->state = ValueTree("blend");
+	state->state = ValueTree("volume");
+
 }
 
 DistortionVstbyMeAudioProcessor::~DistortionVstbyMeAudioProcessor()
@@ -182,12 +192,23 @@ void DistortionVstbyMeAudioProcessor::getStateInformation (MemoryBlock& destData
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+
+	MemoryOutputStream stream(destData, false);
+	state->state.writeToStream(stream);
+
 }
 
 void DistortionVstbyMeAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+
+	ValueTree tree = ValueTree::readFromData(data, sizeInBytes);
+	if (tree.isValid()) {
+		
+		state->state = tree;
+
+	}
 }
 
 //==============================================================================
