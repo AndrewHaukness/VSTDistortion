@@ -157,6 +157,11 @@ void DistortionVstbyMeAudioProcessor::processBlock (AudioBuffer<float>& buffer, 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+	float driveValue = *state->getRawParameterValue("drive");
+	float rangeValue = *state->getRawParameterValue("range");
+	float blendValue = *state->getRawParameterValue("blend");
+	float valueValue = *state->getRawParameterValue("volume");
+
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     // Make sure to reset the state if your inner loop is processing
@@ -167,7 +172,16 @@ void DistortionVstbyMeAudioProcessor::processBlock (AudioBuffer<float>& buffer, 
     {
         auto* channelData = buffer.getWritePointer (channel);
 
-        // ..do something to the data...
+		for (int sample = 0; sample < buffer.getNumSamples(); sample++) {
+			
+			float cleanData = *channelData;
+
+			*channelData *= drive * range;
+			
+			*channelData = (((((2.f / float_Pi) * atan(*channelData)) * blend) + (cleanData * (1.f / blend))) / 2) * volume;
+
+			channelData++;
+		}
     }
 }
 
