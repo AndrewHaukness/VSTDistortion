@@ -24,6 +24,9 @@ DistortionVstbyMeAudioProcessor::DistortionVstbyMeAudioProcessor()
                        )
 #endif
 {
+
+	state = new AudioProcessorValueTreeState(*this, nullptr);
+
 }
 
 DistortionVstbyMeAudioProcessor::~DistortionVstbyMeAudioProcessor()
