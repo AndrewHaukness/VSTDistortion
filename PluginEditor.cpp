@@ -32,6 +32,12 @@ DistortionVstbyMeAudioProcessorEditor::DistortionVstbyMeAudioProcessorEditor (Di
 	addAndMakeVisible(volumeKnob = new Slider("Volume"));
 	volumeKnob->setSliderStyle(Slider::Rotary);
 	volumeKnob->setTextBoxStyle(Slider::NoTextBox, false, 100, 100);
+
+	driveAttachment = new AudioProcessorValueTreeState::SliderAttachment(p.getState(), "drive", *driveKnob);
+	rangeAttachment = new AudioProcessorValueTreeState::SliderAttachment(p.getState(), "range", *rangeKnob);
+	blendAttachment = new AudioProcessorValueTreeState::SliderAttachment(p.getState(), "blend", *blendKnob);
+	volumeAttachment = new AudioProcessorValueTreeState::SliderAttachment(p.getState(), "volume", *volumeKnob);
+
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (500, 200);
