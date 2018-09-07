@@ -28,9 +28,9 @@ DistortionVstbyMeAudioProcessor::DistortionVstbyMeAudioProcessor()
 	state = new AudioProcessorValueTreeState(*this, nullptr);
 
 	state->createAndAddParameter("drive", "Drive", "Drive", NormalisableRange<float>(0.0, 1.0, 0.0001), 1.0, nullptr, nullptr);
-	state->createAndAddParameter("range", "Range", "Range", NormalisableRange<float>(0.0, 1.0, 0.0001), 1.0, nullptr, nullptr);
+	state->createAndAddParameter("range", "Range", "Range", NormalisableRange<float>(0.0, 3000.f, 0.0001), 1.0, nullptr, nullptr);
 	state->createAndAddParameter("blend", "Blend", "Blend", NormalisableRange<float>(0.0, 1.0, 0.0001), 1.0, nullptr, nullptr);
-	state->createAndAddParameter("volume", "Volume", "Volume", NormalisableRange<float>(0.0, 1.0, 0.0001), 1.0, nullptr, nullptr);
+	state->createAndAddParameter("volume", "Volume", "Volume", NormalisableRange<float>(0.0, 3.f, 0.0001), 1.0, nullptr, nullptr);
 
 	state->state = ValueTree("drive");
 	state->state = ValueTree("range");
@@ -157,10 +157,10 @@ void DistortionVstbyMeAudioProcessor::processBlock (AudioBuffer<float>& buffer, 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-	float driveValue = *state->getRawParameterValue("drive");
-	float rangeValue = *state->getRawParameterValue("range");
-	float blendValue = *state->getRawParameterValue("blend");
-	float valueValue = *state->getRawParameterValue("volume");
+	float drive = *state->getRawParameterValue("drive");
+	float range = *state->getRawParameterValue("range");
+	float blend = *state->getRawParameterValue("blend");
+	float volume = *state->getRawParameterValue("volume");
 
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
