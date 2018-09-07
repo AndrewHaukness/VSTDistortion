@@ -66,7 +66,8 @@ void DistortionVstbyMeAudioProcessorEditor::paint (Graphics& g)
 
 void DistortionVstbyMeAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
+    // This is generally where you'll want to lay out the positions of any 
+
     // subcomponents in your editor..
 
 	driveKnob->setBounds(((getWidth() / 5) * 1) - (100 / 2), (getHeight() / 2) - (100 / 2), 100, 100);
